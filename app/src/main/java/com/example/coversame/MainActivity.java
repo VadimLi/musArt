@@ -2,7 +2,6 @@ package com.example.coversame;
 
 import android.Manifest;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements AlbumPresenter.Al
         } else {
             final DeezerConnect deezerConnect = new DeezerConnect(this, APPLICATION_ID);
             AlbumPresenter albumPresenter = new AlbumPresenter(this, deezerConnect);
-            List<Audio> audioList = getAllAudioFromDevice(this);
+            List<Audio> audioList = getAllAudioFromDevice();
             albumPresenter.initAlbums(audioList);
         }
     }
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements AlbumPresenter.Al
         return super.onOptionsItemSelected(item);
     }
 
-    public List<Audio> getAllAudioFromDevice(Context context) {
+    public List<Audio> getAllAudioFromDevice() {
         ContentResolver contentResolver = getContentResolver();
         Uri songUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor songCursor = contentResolver.query(songUri,

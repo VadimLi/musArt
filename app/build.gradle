@@ -25,13 +25,22 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // APPCOMPAT AND CONSTRAINT LAYOUT
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    // RECYCLER VIEW
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    // BUTTER KNIFE
     implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    // RX ANDROID, JAVA
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    // DEEZER_SDK
     implementation project(':deezer-sdk-0.11.2')
+    // JUNIT
     testImplementation 'junit:junit:4.12'
+    // TEST
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 }
