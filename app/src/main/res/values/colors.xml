@@ -2,4 +2,6 @@
 <resources>
     <color name="ColorPrimary">#D1CACA</color>
     <color name="ColorPrimaryDark">#C9C5C5</color>
+    <color name="colorTextConfirm">#575656</color>
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -1,13 +1,12 @@
 package com.example.coversame;
 
 import android.Manifest;
-import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +19,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -27,11 +27,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.deezer.sdk.network.connect.DeezerConnect;
 import com.example.coversame.adapter.AlbumRecyclerAdapter;
 import com.example.coversame.model.Album;
-import com.example.coversame.model.Audio;
 import com.example.coversame.presenter.AlbumPresenter;
 
-import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,28 +64,49 @@ public class MainActivity extends AppCompatActivity implements AlbumPresenter.Al
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
 
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        PERMISSION_STORAGE_REQUEST);
-            } else {
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        PERMISSION_STORAGE_REQUEST);
-            }
+        final String packagePathName = getPackagePathName();
+        final File installingFile = new File(packagePathName + "/install.txt");
+        if (!installingFile.exists()) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
         } else {
-            final DeezerConnect deezerConnect = new DeezerConnect(this, APPLICATION_ID);
-            albumPresenter = new AlbumPresenter(deezerConnect);
-            albumPresenter.attachView(this);
-            List<Audio> audioList = findAllAudioFromDevice();
-            albumPresenter.initAlbums(audioList);
-            addRefresherListener(audioList);
+            if (ContextCompat.checkSelfPermission(MainActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            PERMISSION_STORAGE_REQUEST);
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            PERMISSION_STORAGE_REQUEST);
+                }
+            } else {
+                final DeezerConnect deezerConnect = new DeezerConnect(this, APPLICATION_ID);
+                final SharedPreferences sharedPreferences = PreferenceManager
+                        .getDefaultSharedPreferences(this);
+                albumPresenter = new AlbumPresenter(deezerConnect, sharedPreferences);
+                albumPresenter.attachView(this);
+                albumPresenter.initAlbums(getContentResolver());
+                addRefresherListener();
+            }
         }
+
+    }
+
+    private String getPackagePathName() {
+        final PackageManager m = getPackageManager();
+        String s = getPackageName();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = m.getPackageInfo(s, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return Objects.requireNonNull(packageInfo)
+                .applicationInfo.dataDir;
     }
 
     @Override
@@ -111,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements AlbumPresenter.Al
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            if (!swipeContainer.isRefreshing()) {
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -127,55 +152,15 @@ public class MainActivity extends AppCompatActivity implements AlbumPresenter.Al
     protected void onStop() {
         super.onStop();
         Log.d("state ", "stop activity");
-        albumPresenter.detachView();
-    }
-
-    public List<Audio> findAllAudioFromDevice() {
-        ContentResolver contentResolver = getContentResolver();
-        Uri songUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor songCursor = contentResolver.query(songUri,
-                null, null, null, null);
-
-        List<Audio> audioList = new ArrayList<>();
-
-        if (songCursor != null && songCursor.moveToFirst()) {
-            int songTitle = songCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
-            int songArtist = songCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
-            int songAlbum = songCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
-
-            do {
-                String currentTitle = songCursor.getString(songTitle);
-                String currentArtist = songCursor.getString(songArtist);
-                String currentAlbum = songCursor.getColumnName(songAlbum);
-                String currentPath = songUri.getPath();
-
-                final Audio audio = new Audio();
-                audio.setArtist(currentArtist);
-                audio.setName(currentTitle);
-                final Album album = new Album();
-                album.setName(currentAlbum);
-                audio.setAlbum(album);
-                audioList.add(audio);
-
-                Log.d("title ", currentTitle);
-                Log.d("path", currentPath);
-                Log.d("artist ", currentArtist);
-                Log.d("album ", currentAlbum);
-            } while (songCursor.moveToNext());
+        if (albumPresenter != null) {
+            albumPresenter.detachView();
         }
-        return audioList;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void addRefresherListener(List<Audio> audioList) {
+    private void addRefresherListener() {
         swipeContainer.setOnRefreshListener(() -> {
-            if (progressBar.getVisibility() == View.GONE) {
-                albumPresenter.initAlbums(audioList);
-            } else {
-                final int delay = 300;
-                swipeContainer.postDelayed(() ->
-                        swipeContainer.setRefreshing(false), delay);
-            }
+            albumPresenter.initAlbums(getContentResolver());
         });
     }
 
@@ -192,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements AlbumPresenter.Al
         } else if (swipeContainer.getVisibility() == View.VISIBLE) {
             swipeContainer.setRefreshing(false);
         }
+        setSupportActionBar(toolbar);
     }
 
 }
