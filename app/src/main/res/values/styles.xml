@@ -8,4 +8,13 @@
         <item name="alertDialogTheme">@color/white</item>
     </style>
 
+    <style name="TabLayoutTheme" parent="Base.Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
 </resources>

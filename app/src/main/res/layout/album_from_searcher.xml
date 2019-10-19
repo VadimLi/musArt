@@ -12,16 +12,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
-        android:id="@+id/coverAlbum"
+        android:id="@+id/artAlbum"
         android:layout_width="60dp"
         android:layout_height="60dp" />
 
     <TextView
-        android:id="@+id/fullName"
+        android:id="@+id/albumName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         tools:ignore="RtlCompat" />
 
 </LinearLayout>
-

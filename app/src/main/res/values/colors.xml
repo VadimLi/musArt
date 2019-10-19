@@ -3,5 +3,10 @@
     <color name="ColorPrimary">#D1CACA</color>
     <color name="ColorPrimaryDark">#C9C5C5</color>
     <color name="colorTextConfirm">#575656</color>
+    <color name="colorTabIndicator">#F3EDED</color>
+    <color name="ColorTabTextColor">#5C5A5A</color>
+    <color name="colorTextOfAlbumName">#383737</color>
+    <color name="colorTextOfArtistName">#8D8D8B</color>
+    <color name="ColorTabTextSelectedColor">#F3EDED</color>
     <color name="white">#FFFFFF</color>
 </resources>
