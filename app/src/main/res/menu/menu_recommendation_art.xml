@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/remove_of_cover"
+        android:title="@string/remove_of_cover" />
+    <item
+        android:id="@+id/share_of_art"
+        android:title="@string/share_of_art" />
+</menu>

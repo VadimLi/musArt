@@ -1,13 +1,14 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">МузАрт</string>
+    <string name="title_app_name">музАрт</string>
     <string name="hello_world">Android Material Design App Bar/ActionBar</string>
     <string name="action_share">Поделиться</string>
     <string name="action_about_us">about us</string>
     <string name="action_search">search</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="confirm_settings">OK</string>
-    <string name="search_online">Поиск</string>
-    <string name="downloads">Загрузки</string>
+    <string name="recommendations">Рекомендации</string>
+    <string name="my_albums">Мои альбомы</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -22,16 +23,18 @@
     <string name="saving_of_covers">
         Сохранять обложки в память телефона</string>
     <string name="save_with_replacement">Сохранять с заменой</string>
-    <string name="about">О приложении</string>
-    <string name="about_summary">Текст</string>
+    <string name="about">Информация</string>
+    <string name="about_summary">Данное приложение предназначено для скачивания музыкальных обложек
+        для ваших аудиозаписей, по рекомендациям из внешнего API стримингового сервиса Deezer.</string>
     <string name="cancel_saving_covers">Отмена</string>
-    <string name="title_saving_covers">Подтверждение сохранения</string>
-    <string name="message_saving_covers">Вы действительно хотите заменить обложки,
-        хранящиеся в памяти телефона?</string>
+    <string name="title_saving_covers">Подтверждение</string>
+    <string name="message_saving_covers">Вы действительно хотите очистить все обложки
+        из внешней директории art_works?</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
+    <string name="share">Поделиться</string>
 
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
@@ -39,6 +42,26 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="share_with_art_of_album">share with art of album</string>
+    <string name="share_with_art_of_album">share with art of albumModel</string>
     <string name="art_of_album">art_of_album</string>
+    <string name="more_of_cover">moreOfCover</string>
+    <string name="download_of_cover">dwonloader_of_cover</string>
+    <string name="titleOfMainToolbar">музАрт</string>
+    <string name="return_to_back">return_to_back</string>
+    <string name="share_of_art">Поделиться</string>
+    <string name="delete_of_art">Удалить</string>
+    <string name="go_to_recommendation">Перейти к рекомендациям</string>
+    <string name="remove_of_cover">Убрать из списка</string>
+    <string name="empty_list">Список пуст</string>
+    <string name="not_connection_text">Нет подключения к сети, попробуйте возобновить сеть и
+        потянуть сверху-вниз для того, чтобы возобновить работу приложения</string>
+    <string name="deleteOfAllCovers">Очистить все обложки из папки art_works</string>
+    <string name="memory">Внешняя память</string>
+    <string name="support">Поддержка</string>
+    <string name="support_text">По вопросам обращаться <hr />
+        <i>vadimlipakov@gmail.com</i></string>
+    <string name="permission_message">Разрешите доступ к внешнему хранилищу,
+        чтобы отображать и загружать музыкальные обложки</string>
+    <string name="confirm_permission">OK</string>
+    <string name="permission_title">Разрешение</string>
 </resources>

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ColorPrimary">#D1CACA</color>
-    <color name="ColorPrimaryDark">#C9C5C5</color>
+    <color name="ColorPrimary">#F9F9F8</color>
+    <color name="ColorPrimaryDark">#E1E1E1</color>
     <color name="colorTextConfirm">#575656</color>
-    <color name="colorTabIndicator">#F3EDED</color>
-    <color name="ColorTabTextColor">#5C5A5A</color>
+    <color name="colorTabIndicator">#4B9CA8</color>
+    <color name="ColorTabTextColor">#565555</color>
     <color name="colorTextOfAlbumName">#383737</color>
     <color name="colorTextOfArtistName">#8D8D8B</color>
-    <color name="ColorTabTextSelectedColor">#F3EDED</color>
+    <color name="colorTabTextSelectedColor">#010101</color>
+    <color name="colorTabTextUnSelectedColor">#ABACAD</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorBorderOfCover">#ABACAD</color>
+    <color name="colorSwipeRefreshLayout">#7A7A7A</color>
+    <color name="colorTitleGroupAndAlbumName">#706F6F</color>F
+    <color name="uploadedLinearLayoutColor">#F9F9F8</color>
+    <color name="emptyListTextColor">#7A7A7A</color>
 </resources>

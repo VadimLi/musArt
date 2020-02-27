@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@drawable/ic_share_of_album_art_background"/>
-    <foreground android:drawable="@mipmap/ic_share_of_album_art_foreground"/>
+    <foreground android:drawable="@mipmap/ic_more_of_cover_foreground"/>
 </adaptive-icon>

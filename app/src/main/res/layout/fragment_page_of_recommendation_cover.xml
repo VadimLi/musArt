@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragmentOfRecommendation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <ProgressBar
+        android:id="@+id/progressBarRecommendationOfAlbum"
+        style="@style/Widget.AppCompat.Light.SearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRecommendationContainerOfAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/notConnectionTextOfRecommendation"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/not_connection_text"
+                android:textColor="@color/colorSwipeRefreshLayout"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/emptyRecommendationCoverText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_list"
+                android:textColor="@color/colorSwipeRefreshLayout"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:visibility="gone" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommendationRecyclerViewOfAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>

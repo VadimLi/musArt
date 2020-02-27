@@ -18,27 +18,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:key="category_of_saving"
-        android:title="@string/saving">
+        android:key="category_of_memory"
+        android:title="@string/memory">
 
         <SwitchPreference
-            android:key="saving_of_covers"
+            android:key="deleteOfAllCovers"
             android:defaultValue="false"
-            android:title="@string/saving_of_covers" />
-
-        <CheckBoxPreference
-            android:key="saving_with_replacement"
-            android:defaultValue="false"
-            android:enabled="false"
-            android:title="@string/save_with_replacement" />
+            android:title="@string/deleteOfAllCovers" />
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/about" >
-        <EditTextPreference
+        <PreferenceScreen
             android:key="about"
-            android:enabled="false"
+            android:selectable="false"
             android:summary="@string/about_summary"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/support" >
+        <PreferenceScreen
+            android:key="support"
+            android:summary="@string/support_text"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

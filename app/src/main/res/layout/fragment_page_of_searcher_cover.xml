@@ -1,0 +1,57 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/progressBarSearchingOfAlbum"
+        style="@style/Widget.AppCompat.Light.SearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeSearchingOfAlbumContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/notConnectionTextOfSearcher"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/not_connection_text"
+                android:textColor="@color/colorSwipeRefreshLayout"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/emptySearcherCoverText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_list"
+                android:textColor="@color/colorSwipeRefreshLayout"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:visibility="gone" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/albumSearchingRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pagerOfSearchingAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <FrameLayout
+        android:id="@+id/recommendationFragmentOfAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+</RelativeLayout>
