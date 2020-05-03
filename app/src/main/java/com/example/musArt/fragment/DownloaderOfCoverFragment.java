@@ -57,8 +57,6 @@ public class DownloaderOfCoverFragment extends Fragment
 
     private DownloaderRecyclerAdapter downloaderRecyclerAdapter;
 
-    private Bundle savedInstanceState;
-
     private UtilsUI utilsUI;
 
     @Override
@@ -99,20 +97,17 @@ public class DownloaderOfCoverFragment extends Fragment
             downloaderCoverPresenter.clearCovers(true);
             downloaderCoverPresenter.downloadCovers();
         } else {
-            AlbumModel[] albumModels = (AlbumModel[]) savedInstanceState.get("albumDownloaderModels");
-            assert albumModels != null;
-            String stateList = (String) savedInstanceState.get("stateList");
-            assert stateList != null;
-            displayByStateList(stateList, albumModels, savedInstanceState);
+            displayByStateList(savedInstanceState);
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void displayByStateList(String stateList, AlbumModel[] albumModels,
-                                    Bundle savedInstanceState) {
+    private void displayByStateList(Bundle savedInstanceState) {
+        AlbumModel[] albumModels = (AlbumModel[]) savedInstanceState.get("albumDownloaderModels");
+        String stateList = String.valueOf(savedInstanceState.get("stateList"));
         if (stateList.equals(UtilsUI.StateList.DISPLAY_EMPTY_LIST.name())) {
             displayEmptyListView();
-        } else {
+        } else if (albumModels != null) {
             displayCovers(Arrays.asList(albumModels));
             startLoader(savedInstanceState);
         }

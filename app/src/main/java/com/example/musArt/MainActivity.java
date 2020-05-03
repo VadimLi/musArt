@@ -95,8 +95,8 @@ public class MainActivity extends AppCompatActivity
         searchView = (SearchView) menu.findItem(R.id.searchAlbums).getActionView();
         searchView.setMaxWidth(Integer.MAX_VALUE);
         if (savedInstanceState != null) {
-            boolean focusable = (boolean) savedInstanceState.get("focusable");
-            if (focusable) {
+            Boolean focusable = (Boolean) savedInstanceState.get("focusable");
+            if (focusable != null && focusable) {
                 String searchViewText = String.valueOf(savedInstanceState.get("searchViewText"));
                 searchView.setQuery(searchViewText, true);
                 toolbar.setContentInsetsAbsolute(0, 0);
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (!searchView.isIconified()) {
+        if (searchView != null && !searchView.isIconified()) {
             searchView.setIconified(true);
         } else {
             super.onBackPressed();

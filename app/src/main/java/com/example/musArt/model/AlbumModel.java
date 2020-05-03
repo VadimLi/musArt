@@ -27,7 +27,7 @@ public class AlbumModel implements Parcelable, Comparable<AlbumModel> {
 
     private List<Song> songs = new ArrayList<>();
 
-    private boolean uploaded;
+    private Boolean uploaded;
 
     public AlbumModel() {}
 
@@ -87,11 +87,11 @@ public class AlbumModel implements Parcelable, Comparable<AlbumModel> {
         this.songs = songs;
     }
 
-    public boolean isUploaded() {
+    public Boolean isUploaded() {
         return uploaded;
     }
 
-    public void setUploaded(boolean uploaded) {
+    public void setUploaded(Boolean uploaded) {
         this.uploaded = uploaded;
     }
 
@@ -127,7 +127,6 @@ public class AlbumModel implements Parcelable, Comparable<AlbumModel> {
         dest.writeLong(id);
         dest.writeString(name);
         dest.writeString(groupName);
-        dest.writeBoolean(uploaded);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
