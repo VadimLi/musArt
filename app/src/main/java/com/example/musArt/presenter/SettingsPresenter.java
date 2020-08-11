@@ -24,10 +24,9 @@ public class SettingsPresenter {
     public void deleteOfCovers() {
         File artFolder = new File(ART_WORKS_FOLDER);
         String[] files = artFolder.list();
-        assert files != null;
-        if (files.length == 0) {
+        if (files != null && files.length == 0) {
             settingsView.notifyEmptyFolder();
-        } else {
+        } else if (files != null) {
             for (String fileName : files) {
                 File currentFile = new File(artFolder.getPath() + "/" + fileName);
                 currentFile.delete();

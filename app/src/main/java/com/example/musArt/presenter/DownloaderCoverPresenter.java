@@ -162,8 +162,9 @@ public class DownloaderCoverPresenter {
     }
 
     private String parseGroupNameAndTrackOfSongName(String songName) {
-        if (songName.indexOf(".") > 0)
+        if (songName != null && songName.indexOf(".") > 0) {
             songName = songName.substring(0, songName.lastIndexOf("."));
+        }
         return songName;
     }
 

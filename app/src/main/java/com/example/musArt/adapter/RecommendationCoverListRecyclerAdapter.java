@@ -76,7 +76,8 @@ public class RecommendationCoverListRecyclerAdapter extends
         holder.artOfAlbumList.setImageBitmap(albumArt);
         holder.albumNameOfAlbumList.setText(albumModel.getName());
         holder.artistNameOfAlbumList.setText(albumModel.getGroupName());
-        if (albumModel.isUploaded()) {
+        Boolean uploaded = albumModel.isUploaded();
+        if (uploaded != null && uploaded) {
             holder.stopLoader();
         }
     }

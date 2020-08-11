@@ -80,7 +80,8 @@ public class RecommendationCoverRecyclerAdapter extends
         holder.artAlbum.setImageBitmap(albumArt);
         holder.albumName.setText(albumModel.getName());
         holder.artistName.setText(albumModel.getGroupName());
-        if (albumModel.isUploaded()) {
+        Boolean uploaded = albumModel.isUploaded();
+        if (uploaded != null && uploaded) {
             holder.stopLoader();
         }
     }

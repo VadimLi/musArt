@@ -61,7 +61,7 @@ public class GalleryDownloaderPagerFragment extends DialogFragment {
 
     private View galleryView;
 
-    private int artPositionWithoutNull;
+    private Integer artPositionWithoutNull;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,9 +96,9 @@ public class GalleryDownloaderPagerFragment extends DialogFragment {
                     new GalleryDownloaderPagerFragment.PhotoAdapter(albumModelListWithArt);
             int artPosition = (int) bundle.get("albumPositionId");
             final Map<Integer, Integer> positionMap = DownloaderRecyclerAdapter.getPositionMap();
-            if (savedInstanceState == null) {
+            if (savedInstanceState == null && positionMap != null) {
                 artPositionWithoutNull = positionMap.get(artPosition);
-            } else {
+            } else if (savedInstanceState != null) {
                 artPositionWithoutNull = (int) savedInstanceState.get("position");
             }
             photoAdapter.notifyDataSetChanged();

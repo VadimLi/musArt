@@ -82,7 +82,9 @@ public class SettingsActivity extends AppCompatActivity
             installView();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.permissionsOrSettingsFrameLayout, new SettingsFragment())
+                    .addToBackStack(null)
+                    .replace(R.id.permissionsOrSettingsFrameLayout,
+                            new SettingsActivity.SettingsFragment())
                     .commit();
         }
     }
@@ -145,8 +147,6 @@ public class SettingsActivity extends AppCompatActivity
 
         private Context context;
 
-        private SettingsActivity settingsActivity;
-
         private AlertDialog alertDialog;
 
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -176,14 +176,14 @@ public class SettingsActivity extends AppCompatActivity
                                 deleteOfAllCovers.setChecked(false));
                 alertDialog  = builder.create();
                 alertDialog.show();
-                return false;
+                return true;
             });
 
             PreferenceScreen preferenceScreen = findPreference("support");
             Objects.requireNonNull(preferenceScreen)
                     .setOnPreferenceClickListener(preference -> {
                         sendEmail();
-                        return false;
+                        return true;
                     });
 
         }
@@ -193,8 +193,8 @@ public class SettingsActivity extends AppCompatActivity
             emailIntent.setType("plain/text");
             emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
                     new String[]{"vadimlipakov@gmail.com"});
-            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Приложение МузАрт");
-            context.startActivity(Intent.createChooser(emailIntent, "Отправить письмо"));
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Application MusArt");
+            context.startActivity(Intent.createChooser(emailIntent, "Send email"));
         }
 
         @Override
