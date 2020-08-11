@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:deezer-sdk-0.11.2:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/deezer-sdk-0.11.2/build/.transforms/8f473235d3c6fb1f9049960a3a749dcd/deezer-sdk-0.11.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/deezer-sdk-0.11.2/build/.transforms/8f473235d3c6fb1f9049960a3a749dcd/deezer-sdk-0.11.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
